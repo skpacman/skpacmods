@@ -1,0 +1,71 @@
+=======================
+=========JOKERS========
+All Names are a WIP
+Please suggest new names if you'd like
+=======================
+
+-----Slotmaster-----
++1 Joker Slot when Boss Blind is Defeated
+-1 Joker Slot when Skipping a Blind
+If Joker Slots are FULL when Skipping a Blind, DESTROYS one random joker.
+* Enable Eternal
+* Enable Blueprint
+* Rare
+* $12 Cost
+* Soulable
+
+-----Ticketmaster-----
+Random Voucher always available in Shop
+(has a secret) [ See upgrade ]
+* Uncommon
+* Disable Blueprint
+* Enable Eternal
+* Soulable
+
+-----(??? [Upgrade to Ticketmaster])-----
+[Only available after Ticketmaster is Destroyed]
+Gains 1 Voucher per (condition)
+Will spawn {spawnVoucherCount} Voucher(s) next Shop
+* Rare
+* Disable Blueprint
+* Enable Eternal
+* Soulable
+
+-----Wild Bill-----
+When Dead Man's Hand is played:
+(Dead Man's Hand = Ace of Spades, Ace of Clubs, 8 of Spades, 8 of Clubs)
+Gains X0.25 Mult
++8 Mult & X1 Mult
+* Uncommon
+* Enable Blueprint
+* Enable Eternal
+* Soulable
+
+-----The Cardist-----
+Paint Brush or Palette Voucher always available in Shop
+* Uncommon
+* No Blueprint
+* Enable Eternal
+* Soulable
+
+-----Jackpot-----
+When played hand is 777:
+Small - 1 in 10 chance of $2
+Medium - 1 in 100 chance of $25
+Large - 1 in 1,000 chance of $100
+Jackpot - 1 in 10,000 chance of $500
+* Is destroyed on Large or Jackpot payout
+* Price Ignores Shop Discount Vouchers
+* Rare
+* No Blueprint
+* Soulable
+* Enable Eternal
+
+=====================
+========DECKS========
+All Names are a WIP
+Please suggest new names if you'd like
+=====================
+
+-----Domain Expansion-----
+Starts with 1 Eternal Slotmaster Joker
