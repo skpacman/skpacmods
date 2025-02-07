@@ -1,0 +1,11 @@
+{
+    "id": "skpacmods",
+    "name": "skpacman's Modpack",
+    "author": ["skpacman"],
+    "description": "Adds a collection of Jokers, Decks, Utilities and MORE!",
+    "prefix": "skpacmod",
+    "main_file": "main.lua",
+    "badge_colour": "c7638f",
+    "dependencies": "Steamodded>=1.0.0~ALPHA-1326a",
+    "version": "0.0.1-prototype",
+}
