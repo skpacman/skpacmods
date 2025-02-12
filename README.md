@@ -13,8 +13,8 @@ This includes "Wild Bill" joker, a nod to Wild Bill Hickok of ye olde American W
 4. Done!
 
 ## Let's Talk!
-[WildBill Discussion](https://github.com/skpacman/skpacmods/discussions/3)
-[Join my Discord](https://skpacman.com/discord)
+- [WildBill Discussion](https://github.com/skpacman/skpacmods/discussions/3)
+- [Join my Discord](https://skpacman.com/discord)
 
 Join the Balatro Official Discord!
 Please follow the Balatro Discord's official rules for modding and join the fun
