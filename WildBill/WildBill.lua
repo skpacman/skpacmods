@@ -6,7 +6,7 @@
 --- BADGE_COLOUR: c20000
 --- DISPLAY_NAME: Wild Bill Joker
 --- PREFIX: wbill
---- VERSION: 0.0.1-Prototype
+--- VERSION: 0.5.7
 --- DEPENDENCIES: [Steamodded>=1.0.0~ALPHA-0812d]
 
 ----------------------------------------------
@@ -111,6 +111,24 @@ SMODS.PokerHand{ -- Dead Man's Hand
 		return parts.wbill_DeadMansHand
 	end,
 }
+function set_xmult(self, card, context, val)
+	-- did you specify a value?
+	if not val then
+		-- nope, didn't specify a value
+		-- Has DMH been played before getting this card?
+		if G.GAME.hands[card.ability.hand].played == 0 then
+			-- if not, xmult should be 1
+			card.ability.extra.Xmult = 1
+		elseif G.GAME.hands[card.ability.hand].played > 0 then
+			-- if so, xmult should be ..played + ..xmult_mod
+			card.ability.extra.Xmult = G.GAME.hands[card.ability.hand].played + card.ability.extra.Xmult_mod
+			return true
+		end
+	else
+		-- you did specify a value! explicitly set it!
+		card.ability.extra.Xmult = val
+	end
+end
 
 -- Wild Bill Joker definition.
 SMODS.Joker({
@@ -118,7 +136,8 @@ SMODS.Joker({
 	loc_txt = {
 		name = 'Wild Bill',
 		text = {
-			"{X:mult,C:white}+X#4#{} if {C:attention}Dead Man's Hand{} is played",
+			"{X:mult,C:white}+X#4#{} for each {C:attention}Dead Man's Hand{}",
+			"played this run",
 			"{C:red}+#2#{} Mult and {X:mult,C:white}X#3#{} every hand",
 		}
 	},
@@ -133,6 +152,7 @@ SMODS.Joker({
 		hand = "wbill_DeadMansHand",
 		},
 	loc_vars = function(self, info_queue, card)
+		set_xmult(self, card, context, nil)
 		return {
 			vars = {
 				card.ability.d_size,
@@ -152,45 +172,36 @@ SMODS.Joker({
 	perishable_compat = true,
 	blueprint_compat = true,
 	calculate = function(self, card, context)
-		local function set_xmult(val)
-			if not val then 
-				if G.GAME.hands[card.ability.hand].played == 0 then
-					card.ability.extra.Xmult = 1
-				elseif G.GAME.hands[card.ability.hand].played > 0 then
-					card.ability.extra.Xmult = G.GAME.hands[card.ability.hand].played + card.ability.extra.Xmult_mod
-					return true
-				end
-			else
-				card.ability.extra.Xmult = val
-			end
-		end
-		
+		-- Has the xmult been initially set? if not, set it.
 		if card.ability.extra.initial_set == false then
 			card.ability.extra.initial_set = true
-			set_xmult(1)
+			set_xmult(self, card, context, nil)
 		end
 		
+		-- If DMH is played, increment xmult with message before scoring
 		if context.before and card.ability.hand == context.scoring_name then 
-			set_scored_xmult = set_xmult()
+			set_scored_xmult = set_xmult(self, card, context, nil)
 			if set_scored_xmult then 
 				return { message = "+X" ..  card.ability.extra.Xmult_mod}
 			end
 		end
 		
+		-- Process current stats every hand
 		if context.joker_main then
 			return {
 				mult = card.ability.extra.Hmult,
-				card = card,
-			}
-		end
-		
-		if context.final_scoring_step then 
-			return {
 				xmult = card.ability.extra.Xmult,
 				card = card,
 			}
 		end
-	end
+	end,
+	add_to_deck = function(self, card, from_debuff)
+		-- Has the xmult been initially set? if not, set it.
+		if card.ability.extra.initial_set == false then
+			card.ability.extra.initial_set = true
+			set_xmult(self, card, context, nil)
+		end
+	end,
 })
 
 SMODS.Back{
